@@ -1,7 +1,9 @@
 package com.bilgeadam.example.js.login;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
@@ -18,6 +20,9 @@ public class LoginView {
     private String kullaniciAdi;
     private String sifre;
 
+    @ManagedProperty(value = "#{kullaniciBilgileri}")
+    private KullaniciBilgileri kullaniciBilgileri;
+
     public void login(){
 
         FacesContext facesContext=FacesContext.getCurrentInstance();
@@ -25,6 +30,7 @@ public class LoginView {
         if (kullaniciAdi.equals("admin")&&sifre.equals("12345")){
 
             facesContext.getExternalContext().getSessionMap().put("kullanıcı",kullaniciAdi);
+            kullaniciBilgileri.setKullaniciAdi(kullaniciAdi);
 
             try {
                 facesContext.getExternalContext().redirect("index.xhtml");
@@ -68,5 +74,13 @@ public class LoginView {
 
     public void setSifre(String sifre) {
         this.sifre = sifre;
+    }
+
+    public KullaniciBilgileri getKullaniciBilgileri() {
+        return kullaniciBilgileri;
+    }
+
+    public void setKullaniciBilgileri(KullaniciBilgileri kullaniciBilgileri) {
+        this.kullaniciBilgileri = kullaniciBilgileri;
     }
 }

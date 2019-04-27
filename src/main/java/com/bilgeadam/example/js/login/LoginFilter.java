@@ -24,7 +24,8 @@ public class LoginFilter implements Filter{
         if (isSession||isLogin){
             filterChain.doFilter(request,response);
         }else {
-            response.sendRedirect(urlPath);
+            //response.sendRedirect(urlPath);
+            filterChain.doFilter(request,response);
         }
     }
 
