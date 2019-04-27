@@ -1,6 +1,5 @@
 package com.bilgeadam.example.js.login;
 
-import javax.faces.context.FacesContext;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,14 +17,14 @@ public class LoginFilter implements Filter{
         String urlPath=request.getContextPath()+"/login.xhtml";
 
         Boolean isSession=session!=null&&session.getAttribute("kullanıcı")!=null;
-        Boolean isLogin=request.getRequestURL().equals(urlPath);
+        Boolean isLogin=request.getRequestURI().equals(urlPath);
 
 
         if (isSession||isLogin){
             filterChain.doFilter(request,response);
         }else {
-            //response.sendRedirect(urlPath);
-            filterChain.doFilter(request,response);
+            response.sendRedirect(urlPath);
+            //filterChain.doFilter(request,response);
         }
     }
 
