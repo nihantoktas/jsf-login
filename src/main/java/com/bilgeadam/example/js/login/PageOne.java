@@ -1,6 +1,8 @@
 package com.bilgeadam.example.js.login;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 
 /**
@@ -16,6 +18,7 @@ public class PageOne {
 
     public void degistirText() {
         outputText = text;
+        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(outputText));
     }
 
     public String getText() {

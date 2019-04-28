@@ -11,18 +11,31 @@
 
     <ui:define name="content">
 
+        <!--<h:head>
+            P:ajax componentinin çalışması için gerekli
+            Biz head componentini template içerisinde eklediğimiz için gerek duymuyoruz.
+        </h:head>-->
+
+
         <h:body>
+            <p:growl id="growl" globalOnly="true"/>
 
             <h1>Welcome Page1</h1>
 
-            <h:form>
-                <p:panelGrid columns="2">
-                    <p:outputLabel value="Text:"/>
-                    <p:inputText id="input_text" value="#{pageOne.text}"/>
-                    <p:outputLabel id="output_label" value="#{pageOne.outputText}"/>
-                    <h:commandButton value="Degistir" actionListener="#{pageOne.degistirText}"/>
-                </p:panelGrid>
-            </h:form>
+            <p:panel>
+                <h:form>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Text:"/>
+                        <p:inputText id="input_text" value="#{pageOne.text}">
+                            <p:ajax event="keyup" listener="#{pageOne.degistirText}" update="output_label growl"/>
+                        </p:inputText>
+                        <p:outputLabel id="output_label" value="#{pageOne.outputText}"/>
+                        <h:commandButton value="Degistir"
+                                         actionListener="#{pageOne.degistirText}"
+                                         update="growl"/>
+                    </p:panelGrid>
+                </h:form>
+            </p:panel>
 
         </h:body>
 
